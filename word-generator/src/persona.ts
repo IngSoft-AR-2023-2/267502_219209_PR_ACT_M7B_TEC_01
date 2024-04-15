@@ -1,4 +1,4 @@
-interface Persona {
+export interface Persona {
     nombre: string | null,
     apellido: string | null,
     cedula: string | null,

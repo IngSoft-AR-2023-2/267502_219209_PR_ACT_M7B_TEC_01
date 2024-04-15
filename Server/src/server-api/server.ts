@@ -2,23 +2,23 @@ import express, { Express, Request, Response } from 'express';
 import { CustomData } from '../data-structure/CustomData';
 import { Pipeline } from '../Pipeline/pipeline';
 import { QueueFactory } from '../Pipeline/queueFactory';
-import { validatePhone } from '../filters/filters';
+import { validateAssitance, validatePhone } from '../filters/filters';
 require('dotenv').config();
 
 const app: Express = express();
 const port: number = 3000;
 
 const queueFactory = QueueFactory.getQueueFactory<CustomData>;
-const pipeline = new Pipeline<CustomData>([validatePhone], queueFactory);
+const pipeline = new Pipeline<CustomData>([validatePhone, validateAssitance], queueFactory);
 
 app.use(express.json());
 
 pipeline.on('finalOutput', (output) => {
-  console.log(`Salida final: ${output.word}`);
+  console.log(`Se ha finalizado satisfactoriamente el proceso de agenda para la persona  ${output.nombre} ${output.apellido}`);
 });
 
 pipeline.on('errorInFilter', (error, data) => {
-    console.error(`Error en el filtro: ${error}, Datos: ${data.word}`);
+    console.error(`No se ha podido agendar ${data.nombre} ${data.apellido}`);
 });
  
 
