@@ -6,7 +6,7 @@ const sendPerson = async () => {
   for(let persona of personas){
     try {
       
-        const response = await axios.post('http://localhost:3000/words', persona);
+        const response = await axios.post('http://localhost:3000/people', persona);
        console.log(`Se ha iniciado el proceso de agenda para la persona ${response.data.nombre} ${response.data.apellido}`);
       
     } catch (error) {

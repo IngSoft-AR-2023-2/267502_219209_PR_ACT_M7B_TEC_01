@@ -22,12 +22,12 @@ pipeline.on('errorInFilter', (error, data) => {
 });
  
 
-app.post('/words', (req: Request, res: Response) => {
+app.post('/people', (req: Request, res: Response) => {
   
 
   if(validateWord(req)){
     
-    console.log('Received data:', req.body);
+    
     res.status(200).send(req.body);
 
     let movilidad = req.body.movilidad == 'SI';
